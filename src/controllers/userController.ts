@@ -104,3 +104,22 @@ export const deleteUser = async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
 };
+
+export const getVerifiedWorkers = async (req: Request, res: Response) => {
+    try {
+        // Find users with specified conditions and project only name and _id fields
+
+        let professions = req.params.professions || "";
+        console.log(professions)
+        const users = await User.find({ isWorker: true, verified: true, professions: professions }, 'name _id');
+
+        // Check if users array is empty (no users found)
+        if (!users || users.length === 0) {
+            return res.status(404).json({ error: 'No verified workers found' });
+        }
+
+        res.status(200).json(users);
+    } catch (error: any) {
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
+    }
+};
