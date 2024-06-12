@@ -21,7 +21,7 @@ export const createJob = async (req: Request, res: Response) => {
 
         // Update the worker's jobsPending array
         const workerUpdateResult = await User.findByIdAndUpdate(
-            user,
+            worker,
             { $push: { appliedJobs: savedJob._id } }
         );
 
