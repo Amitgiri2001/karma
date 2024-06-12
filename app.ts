@@ -17,9 +17,16 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const port = process.env.PORT || 3000;
-const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/mydatabase';
+if (!process.env.MONGODB_URI1) {
+    throw new Error('MONGODB_URI1 is not defined');
+}
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/mydatabase';
 
-mongoose.connect(mongoUri)
+const mongoUri1: string = process.env.MONGODB_URI1;
+
+console.log(mongoUri1);
+
+mongoose.connect(mongoUri1)
     .then(() => {
         console.log('Connected to MongoDB');
         app.listen(port, () => {
