@@ -33,7 +33,9 @@ mongoose.connect(mongoUri)
 app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
-
+app.get('/', (req, res) => {
+    res.send("Hii");
+})
 app.use('/users', userRoutes);
 app.use('/workers', workerRoutes);
 app.use('/jobs', jobRoutes);
